@@ -1,0 +1,39 @@
+﻿@model NetCoreModel.UserInfo
+@{
+    Layout = null;
+}
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>FcjNetCore </title>
+    <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+ </head>
+<body>
+ <div class="message warning">
+        <div class="inset">
+            <div class="login-head">
+                <h1>用户登录</h1>
+                <div class="alert-close"></div>
+            </div>
+         <form asp-controller="Login" asp-action="Index" method="post">
+                <ul>
+                    <li><input type="text" class="text" asp-for="UserName" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}"><a href="#" class=" icon user"></a></li>
+                    <li><input type="password" asp-for="UserPassWord"  value="" placeholder="请输入密码"/> <a href="#" class="icon lock"></a></li>
+                </ul>
+              <div class="submit">
+                    <input type="submit" value="登录">
+                    <h4><a href="#">忘记密码?</a></h4>
+                    <div class="clear">  </div>
+                </div>
+            </form>
+        </div>
+    </div>
+   <!--- footer --->
+    <div class="footer">
+        <p>Copyright &copy; 2018.01.01</p>
+    </div>
+</body>
+</html>
+
