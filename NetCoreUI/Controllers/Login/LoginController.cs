@@ -18,7 +18,7 @@ namespace NetCoreUI.Controllers.Login
         public IActionResult Index([FromForm]UserInfo Model)
         {
             if (ModelState.IsValid)
-            {
+            {             
                 HttpContext.Session.Set("CurrentUser", SessionConvert.Object2Bytes(Model));
                 //return Json(new { IsSuccess = 0, Message = "成功" });
                 //跳转到首页

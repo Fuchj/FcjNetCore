@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Configuration" Version="4.0.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
   </ItemGroup>
@@ -15,7 +17,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NetCoreHelp\NetCoreHelp.csproj" />
+    <ProjectReference Include="..\NetCoreIservice\NetCoreIservice.csproj" />
     <ProjectReference Include="..\NetCoreModel\NetCoreModel.csproj" />
+    <ProjectReference Include="..\NetCoreService\NetCoreService.csproj" />
   </ItemGroup>
 
 </Project>

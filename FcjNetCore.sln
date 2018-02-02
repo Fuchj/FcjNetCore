@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreUI", "NetCoreUI\NetCoreUI.csproj", "{02E99CB9-4650-4626-80AF-7E1F8A59CCC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreUI", "NetCoreUI\NetCoreUI.csproj", "{02E99CB9-4650-4626-80AF-7E1F8A59CCC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreHelp", "NetCoreHelp\NetCoreHelp.csproj", "{80E85C08-68BD-4518-AE7E-F6B365149FC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreHelp", "NetCoreHelp\NetCoreHelp.csproj", "{80E85C08-68BD-4518-AE7E-F6B365149FC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreService", "NetCoreService\NetCoreService.csproj", "{EFD9715D-5D6A-4577-AF83-82726BB901A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreService", "NetCoreService\NetCoreService.csproj", "{EFD9715D-5D6A-4577-AF83-82726BB901A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreModel", "NetCoreModel\NetCoreModel.csproj", "{53E42531-79C2-4862-9654-80BAFA173D8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreModel", "NetCoreModel\NetCoreModel.csproj", "{53E42531-79C2-4862-9654-80BAFA173D8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreIservice", "NetCoreIservice\NetCoreIservice.csproj", "{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{53E42531-79C2-4862-9654-80BAFA173D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53E42531-79C2-4862-9654-80BAFA173D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53E42531-79C2-4862-9654-80BAFA173D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

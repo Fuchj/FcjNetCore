@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Controllers;
+//using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using NetCoreUI.Autofac;
+using System;
 
 namespace NetCoreUI
 {
@@ -17,13 +20,26 @@ namespace NetCoreUI
         }
 
         public IConfiguration Configuration { get; }
-
+       
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            //替换控制器所有者
+            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+           
             services.AddMvc();
+            //services.AddDbContext<BloggingContext>();
+            //services.AddDirectoryBrowser();
             //Session服务
             services.AddSession();
+            var builder = new ContainerBuilder();//实例化 AutoFac 容器
+            //模块注入
+            //builder.RegisterModule<DefaultModule>();
+            //属性注入控制器
+            builder.RegisterType<DefaultProperties>().PropertiesAutowired();
+            builder.Populate(services);
+            var ApplicationContainer = builder.Build();
+            return new AutofacServiceProvider(ApplicationContainer);//第三方IOC接管 core内置DI容器  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
