@@ -18,15 +18,12 @@ namespace NetCoreUI
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
-       
+        public IConfiguration Configuration { get; }      
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //替换控制器所有者
-            //services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
-           
+            //services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());       
             services.AddMvc();
             //services.AddDbContext<BloggingContext>();
             //services.AddDirectoryBrowser();
@@ -41,7 +38,6 @@ namespace NetCoreUI
             var ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(ApplicationContainer);//第三方IOC接管 core内置DI容器  
         }
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
