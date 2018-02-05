@@ -7,9 +7,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>FcjNetCore </title>
-    <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
- </head>
+    <environment names="Development">
+        <link href="~/css/layui.css" rel="stylesheet" />
+        <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/layui/layui.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <link href="~/css/layui.css" rel="stylesheet" asp-append-version="true" />
+        <script src="~/layui/layui.js" asp-append-version="true"></script>
+    </environment>
+    
+</head>
 <body>
  <div class="message warning">
         <div class="inset">
@@ -30,10 +41,22 @@
             </form>
         </div>
     </div>
+    <input type="hidden"asp-for="Message"/>
    <!--- footer --->
     <div class="footer">
         <p>Copyright &copy; 2018.01.01</p>
     </div>
 </body>
 </html>
+<script>
+    $(function () {
 
+        if ($("#Message").val() != "") {
+            layui.use('layer', function () {
+                var layer = layui.layer //弹层                   
+                //向世界问个好
+                layer.msg($("#Message").val());
+            })
+        }
+    })
+</script>

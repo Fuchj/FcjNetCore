@@ -7,7 +7,7 @@ using NetCoreIservice;
 
 namespace NetCoreUI.Controllers.Show
 {
-    public class ChartController : Controller
+    public class ChartController : BaseController
     {
         public readonly ICeShi _ceshi;
         public readonly ICeShi1 _ICeShi1;

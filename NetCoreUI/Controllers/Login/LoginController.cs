@@ -12,7 +12,7 @@ namespace NetCoreUI.Controllers.Login
     {
         public IActionResult Index()
         {
-            return View();
+            return View(new UserInfo());
         }
         [HttpPost]
         public IActionResult Index([FromForm]UserInfo Model)
@@ -32,7 +32,10 @@ namespace NetCoreUI.Controllers.Login
                     Error += item.Value.Errors.First().ErrorMessage;
                 }
             }
-            return Json(new { IsSuccess = 0, Message = $"请求失败，{Error}" });
+            UserInfo result = Model;
+            result.Message = Error;
+            return View(result);
+            //return Json(new { IsSuccess = 0, Message = $"请求失败，{Error}" });
         }
     }
 }

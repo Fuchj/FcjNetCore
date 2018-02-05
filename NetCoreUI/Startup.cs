@@ -25,7 +25,7 @@ namespace NetCoreUI
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             //替换控制器所有者
-            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
+            //services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());
            
             services.AddMvc();
             //services.AddDbContext<BloggingContext>();
@@ -34,9 +34,9 @@ namespace NetCoreUI
             services.AddSession();
             var builder = new ContainerBuilder();//实例化 AutoFac 容器
             //模块注入
-            //builder.RegisterModule<DefaultModule>();
+            builder.RegisterModule<DefaultModule>();
             //属性注入控制器
-            builder.RegisterType<DefaultProperties>().PropertiesAutowired();
+            //builder.RegisterType<DefaultProperties>().PropertiesAutowired();
             builder.Populate(services);
             var ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(ApplicationContainer);//第三方IOC接管 core内置DI容器  
