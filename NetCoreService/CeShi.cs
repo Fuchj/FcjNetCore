@@ -12,11 +12,11 @@ namespace NetCoreService
             return "ceshi123";
         }
     }
-    public class CeShi1 : ICeShi1
-    {
-        public int Show()
-        {
-            return 45679;
-        }
-    }
+    //public class CeShi1 : ICeShi1
+    //{
+    //    public int Show()
+    //    {
+    //        return 45679;
+    //    }
+    //}
 }

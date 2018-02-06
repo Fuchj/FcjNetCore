@@ -14,7 +14,7 @@ namespace NetCoreUI.Autofac
         {
             //注入测试服务
             builder.RegisterType<CeShi>().As<ICeShi>();
-            builder.RegisterType<CeShi1>().As<ICeShi1 >();
+           // builder.RegisterType<CeShi1>().As<ICeShi1 >();
         }
     }
 }

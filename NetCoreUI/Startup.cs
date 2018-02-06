@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using NetCoreUI.Autofac;
+using NetCoreUI.Controllers.Show;
 using System;
 
 namespace NetCoreUI
@@ -33,7 +34,7 @@ namespace NetCoreUI
             //模块注入
             builder.RegisterModule<DefaultModule>();
             //属性注入控制器
-            //builder.RegisterType<DefaultProperties>().PropertiesAutowired();
+             //builder.RegisterType<ChartController>().PropertiesAutowired();
             builder.Populate(services);
             var ApplicationContainer = builder.Build();
             return new AutofacServiceProvider(ApplicationContainer);//第三方IOC接管 core内置DI容器  

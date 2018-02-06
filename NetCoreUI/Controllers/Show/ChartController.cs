@@ -7,19 +7,19 @@ using NetCoreIservice;
 
 namespace NetCoreUI.Controllers.Show
 {
-    public class ChartController : BaseController
+    public class ChartController : Controller
     {
         public readonly ICeShi _ceshi;
-        public readonly ICeShi1 _ICeShi1;
-        public ChartController(ICeShi ceshi, ICeShi1 ceShi1)
+        //public readonly ICeShi1 _ICeShi1;
+        public ChartController(ICeShi ceshi)
         {
             _ceshi = ceshi;
-            _ICeShi1 = ceShi1;
+          
         }
         public IActionResult Index()
         {
             var result=_ceshi.Show();
-            var result1 = _ICeShi1.Show();
+            //var result1 = _ICeShi1.Show();
             return View();
         }
     }

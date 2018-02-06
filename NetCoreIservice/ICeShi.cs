@@ -8,8 +8,8 @@ namespace NetCoreIservice
     {
         string Show();
     }
-    public interface ICeShi1
-    {
-        int Show();
-    }
+    //public interface ICeShi1
+    //{
+    //    int Show();
+    //}
 }
