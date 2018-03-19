@@ -46,13 +46,12 @@
 </html>
 <script>
     $(function () {
-        if ($("#Message").val() != "") {
+        var msg = $("#Message").val();
+        if (msg != "") {
             layui.use('layer', function () {
-                var layer = layui.layer //弹层                   
-                //向世界问个好
-                layer.msg($("#Message").val());
+                var layer = layui.layer                           
+                layer.msg(msg);
             })
-        }
-       
+        }      
     })
 </script>
