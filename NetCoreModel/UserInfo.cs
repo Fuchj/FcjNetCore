@@ -12,9 +12,8 @@ namespace NetCoreModel
     {
         public int UserID { get; set; }
         [Required(ErrorMessage = "用户名不能为空。")]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = "123";
         [Required(ErrorMessage = "密码不能为空。")]
-        public string UserPassWord { get; set; }
-       
+        public string UserPassWord { get; set; }    
     }
 }

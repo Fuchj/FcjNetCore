@@ -6,51 +6,46 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>FcjNetCore </title>
+    <title>登录页</title>
     <environment names="Development">
-        <link href="~/css/layui.css" rel="stylesheet" />
-        <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/layui/layui.js" asp-append-version="true"></script>
+        <link rel="stylesheet" href="~/css/base/reset.css" asp-append-version="true">
+        <link rel="stylesheet" href="~/layui/css/layui.css">
+        <link rel="stylesheet" href="~/css/login.css" asp-append-version="true">
     </environment>
     <environment names="Staging,Production">
-        <link href="~/css/loginstyle.css" rel="stylesheet" type="text/css" media="all" />
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <link href="~/css/layui.css" rel="stylesheet" asp-append-version="true" />
-        <script src="~/layui/layui.js" asp-append-version="true"></script>
+
     </environment>
-    
+
 </head>
-<body>
- <div class="message warning">
-        <div class="inset">
-            <div class="login-head">
-                <h1>用户登录</h1>
-                <div class="alert-close"></div>
+<body class="login-container">
+    <div class="login-box">
+        <h2>洛阳轴承智能制造信息化管理系统</h2>
+        <form asp-controller="Login" asp-action="Index" method="post" class="layui-form">
+            <div class="login-face">
+                <img src="~/images/Logo.png" alt="郑大智能" />
             </div>
-         <form asp-controller="Login" asp-action="Index" method="post">
-                <ul>
-                    <li><input type="text" class="text" asp-for="UserName" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}"><a href="#" class=" icon user"></a></li>
-                    <li><input type="password" asp-for="UserPassWord"  value="" placeholder="请输入密码"/> <a href="#" class="icon lock"></a></li>
-                </ul>
-              <div class="submit">
-                    <input type="submit" value="登录">
-                    <h4><a href="#">忘记密码?</a></h4>
-                    <div class="clear">  </div>
-                </div>
-            </form>
-        </div>
+            <div class="layui-form-item input-item" lay-filter="username">
+                <label class="layui-label" for="userName" style="display: none">用户名</label>
+                <input class="layui-input" asp-for="UserName" placeholder="请输入用户名" type="text">
+            </div>
+            <div class="layui-form-item input-item" lay-filter="password">
+                <label class="layui-label" for="password" style="display: none">密码</label>
+                <input class="layui-input" asp-for="UserPassWord" placeholder="请输入密码" type="password">
+            </div>
+
+            <div class="layui-form-item">
+                <button type="submit" class="layui-btn">登录</button>
+            </div>
+        </form>
+        <input type="hidden" asp-for="Message" />
     </div>
-    <input type="hidden"asp-for="Message"/>
-   <!--- footer --->
-    <div class="footer">
-        <p>Copyright &copy; 2018.01.01</p>
-    </div>
+    <script src="~/js/jquery-1.91.min.js"></script>
+    <script src="~/layui/layui.js"></script>
+    <script src="~/js/login.js" asp-append-version="true"></script>
 </body>
 </html>
 <script>
     $(function () {
-
         if ($("#Message").val() != "") {
             layui.use('layer', function () {
                 var layer = layui.layer //弹层                   
@@ -58,5 +53,6 @@
                 layer.msg($("#Message").val());
             })
         }
+       
     })
 </script>

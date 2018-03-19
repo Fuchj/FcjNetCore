@@ -31,10 +31,9 @@ namespace NetCoreUI.Controllers.Login
                 {
                     Error += item.Value.Errors.First().ErrorMessage;
                 }
-            }
-            UserInfo result = Model;
-            result.Message = Error;
-            return View(result);
+            }       
+            Model.Message = Error;
+            return View(Model);
             //return Json(new { IsSuccess = 0, Message = $"请求失败，{Error}" });
         }
     }

@@ -1,0 +1,82 @@
+.login-container { 
+    background: url('../images/login-bg.jpg') no-repeat center center;  
+
+}
+.login-container h2{
+	color: #fff;
+	position: absolute;	
+	left:50%;	
+	height: 66px;
+	margin: -270px 0  0 -533px;
+}
+ .login-html ,.login-container{
+	height: 100%;
+}
+.login-container .login-box{
+	position: absolute;
+	top:50%;
+	left:50%;	
+	width: 500px;
+	height: 350px;
+	
+	box-sizing: border-box;
+	padding: 0 20px;
+	
+}
+.login-container .layui-form{
+	
+	position: absolute;
+	width: 300px;
+	height: 335px;
+	margin: -150px 0  0 -150px;
+	box-sizing: border-box;
+	padding: 0 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 50px #009688;
+
+}
+
+.login-container .layui-form .login-face{
+	height: 100px;
+	width: 100px;
+	box-shadow: 0 0 30px #009688;
+	margin: -50px auto 20px;
+	border-radius: 50%;
+}
+.login-container .layui-form .login-face img{
+	width: 100%;
+}
+
+.login-container .layui-form .layui-form-item input{
+	transition: all 0.3s ease-in-out;
+	-webkit-transition:all 0.3s ease-in-out;
+}
+.layui-input:focus{
+	border-color: #009688 !important;
+	box-shadow: 0 0 20px #009688;
+}
+.layui-label-userfocus{
+	position: absolute;
+	top:62px;
+	left: 40px;
+	font-size: 12px;
+	background-color: #fff;
+	z-index: 200;
+	padding: 0 5px;
+	color: #009688;
+	border-radius: 50px;
+}
+.layui-label-passwordfocus{
+	position: absolute;
+	top:115px;
+	left: 40px;
+	font-size: 12px;
+	background-color: #fff;
+	z-index: 200;
+	padding: 0 5px;
+	color: #009688;
+	border-radius: 50px;
+}
+.login-container .layui-form .layui-form-item .layui-btn{
+	width: 260px;
+}
