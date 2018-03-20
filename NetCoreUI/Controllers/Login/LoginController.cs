@@ -22,7 +22,7 @@ namespace NetCoreUI.Controllers.Login
                 HttpContext.Session.Set("CurrentUser", SessionConvert.Object2Bytes(Model));
                 //return Json(new { IsSuccess = 0, Message = "成功" });
                 //跳转到首页
-                return RedirectToAction("Index", "Chart");
+                return RedirectToAction("Index", "Home");
             }
             string Error = "";
             foreach (var item in ModelState)

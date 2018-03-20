@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using NetCoreUI.Models;
 
 namespace NetCoreUI.Controllers
 {
     public class HomeController : Controller
     {
+        private ILog log = LogManager.GetLogger(Startup.Repository.Name, typeof(HomeController));
+        private readonly ILogger _logger;
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
         public IActionResult Index()
         {
+            _logger.LogError("logger记录错误");
+            log.Error("log4net记录错误");
             return View();
         }
 

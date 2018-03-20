@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 //using Microsoft.AspNetCore.Mvc.Controllers;
@@ -7,14 +10,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreUI.Autofac;
 using System;
+using System.IO;
 
 namespace NetCoreUI
 {
     public class Startup
     {
+
+        public static ILoggerRepository Repository;//log4net
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            Repository = LogManager.CreateRepository("NETCoreRepository");
+            XmlConfigurator.Configure(Repository, new FileInfo("log4net.config"));
         }
         public IConfiguration Configuration { get; }      
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -60,6 +68,7 @@ namespace NetCoreUI
                     name: "default",
                     template: "{controller=Login}/{action=Index}/{id?}");
             });
+
         }
     }
 }
