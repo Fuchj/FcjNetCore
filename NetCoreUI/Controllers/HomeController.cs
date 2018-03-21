@@ -20,8 +20,9 @@ namespace NetCoreUI.Controllers
         }
         public IActionResult Index()
         {
-            _logger.LogError("logger记录错误");
-            log.Error("log4net记录错误");
+            //_logger.LogError("logger记录错误");
+            //log.Error("log4net记录错误");
+            throw new Exception();
             return View();
         }
 

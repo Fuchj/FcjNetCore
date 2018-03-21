@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreUI.Autofac;
+using NetCoreUI.Filter;
 using System;
 using System.IO;
 
@@ -30,7 +31,11 @@ namespace NetCoreUI
         {
             //替换控制器所有者
             //services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());       
-            services.AddMvc();
+            // services.AddMvc();
+            services.AddMvc(options =>
+            {
+                options.Filters.Add<HttpGlobalExceptionFilter>();
+            });
             //services.AddDbContext<BloggingContext>();
             //services.AddDirectoryBrowser();
             //Session服务
@@ -68,6 +73,7 @@ namespace NetCoreUI
                     name: "default",
                     template: "{controller=Login}/{action=Index}/{id?}");
             });
+            
 
         }
     }
