@@ -14,12 +14,12 @@ namespace NetCoreUI.Filter
     /// <summary>
     /// 自定义全局异常过滤器
     /// </summary>
-    public class HttpGlobalExceptionFilter : IExceptionFilter
+    public class GlobalExceptionFilter : IExceptionFilter
     {
        
         readonly ILoggerFactory _loggerFactory;//采用内置日志记录
         readonly IHostingEnvironment _env;//环境变量
-        public HttpGlobalExceptionFilter(ILoggerFactory loggerFactory, IHostingEnvironment env)
+        public GlobalExceptionFilter(ILoggerFactory loggerFactory, IHostingEnvironment env)
         {
             _loggerFactory = loggerFactory;
             _env = env;
@@ -35,7 +35,6 @@ namespace NetCoreUI.Filter
             //context.Exception,
             //context.Exception.Message);
             #endregion
-
             if (_env.IsDevelopment())
             {
                 log.Error(context.Exception.ToString());
@@ -48,10 +47,10 @@ namespace NetCoreUI.Filter
             else
             {
                 log.Error(context.Exception.ToString());
+                context.ExceptionHandled = true;
                 context.Result=new RedirectResult("/home/Error");
             }
         }
-
         public class ApplicationErrorResult : ObjectResult
         {
             public ApplicationErrorResult(object value) : base(value)
@@ -59,9 +58,6 @@ namespace NetCoreUI.Filter
                 StatusCode = (int)HttpStatusCode.InternalServerError;
             }
         }
-
-
-
         public class ErrorResponse
         {
             public ErrorResponse(string msg)
