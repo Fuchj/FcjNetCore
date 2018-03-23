@@ -1,0 +1,140 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Test</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="~/js/jquery-1.91.min.js"></script>
+<script src="~/layui/layui.js"></script>
+<script type="text/javascript">
+    console.log("----------------------ES6以前的语法--------------------------------------------------");
+    //ES6以前类的创建及向类中追加一个属性与一个方法
+    function employee(name, job, born) {
+        this.name = name;
+        this.job = job;
+        this.age = born;
+        this.show = function (obj) {
+            console.log("hahaha" + obj);
+        };
+    }
+    var bill = new employee("Bill Gates", "Engineer", 1985);
+    //向类中追加一个属性与一个方法
+    employee.prototype.salary = 21421;
+    employee.prototype.test = function (obj) {
+        console.log(obj);
+        return "hello" + obj
+    };
+    bill.test("钉钉");
+    console.log(bill);
+    console.log("--------------------------ES6的语法----------------------------------------------");
+    //ES6类定义类
+    class Person {
+        // 构造函数
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+        toString() {
+            return (this.x + "的年龄是" + this.y + "岁");
+        }
+    }
+    //Person如C#一样，需要用new实例化
+    var model = new Person("xiaoming", 12);
+    console.log(model);
+    console.log(model.toString());
+
+    console.log("--------------------------ES6类的继承----------------------------------------------");
+    class Teacher extends Person {
+        constructor(x, y, color) {
+            super(x, y); // 调用父类的Person(x, y)
+            this.color = color;
+        }
+        toString() {
+            return this.color + ' ' + super.toString(); // 调用父类的toString()
+        }
+    }
+    var teacher = new Teacher("旺财", 5, "Red");
+    console.log(teacher);
+    console.log("--------------------------ES6类的静态方法----------------------------------------------");
+    class School {
+        static classMethod() {
+            return '机械一班';
+        }
+    }
+    console.log(School.classMethod());
+    var school = new School();
+   // console.log(school.classMethod());//not a function
+
+
+    //-----------
+    var ws;
+    //var fullUrl = "ws://172.27.1.72:8844?{'ToKen':'8474ded47d1543c1bc878f1b38b9590a','RequestType':1,'ID':101,'RequestNum':101}";
+    //var fullUrl = "ws://10.47.0.200:8844?{'ToKen':'8474ded47d1543c1bc878f1b38b9590a','RequestType':1,'ID':101,'RequestNum':101}";
+    //var fullUrl = "ws://172.27.1.72:8844?8474ded47d1543c1bc878f1b38b9590a";
+    //var fullUrl = "ws://localhost:14922//wsone/Connect";
+    var fullUrl = "ws://" + window.location.host + "@Url.Action("Connect")";  
+    $(function () {
+        LoadData();
+    })
+    //--------------------------Websocket Data-----------------------------------------------------------------
+    // 初始化连接和事件
+    function LoadData() {
+        layui.use(['layer', 'jquery'], function () {
+            var layer = layui.layer,
+                $ = layui.jquery;
+
+            try {
+                if ("WebSocket" in window) {
+                    ws = new WebSocket(fullUrl);
+                    ws.binaryType = "arraybuffer";
+                }
+                else if ("MozWebSocket" in window) {
+                    ws = new MozWebSocket(fullUrl);
+                    ws.binaryType = "arraybuffer";
+                } else {
+                    alert("浏览器不支持WebSocket");
+                }
+                // 监听open
+                ws.onopen = function (e) {
+                    console.log("成功连接服务器");
+                    //sendMsg("{ 'Key': 'Monitor_ProductLine', 'Value': 10101,'SleepTime': 500}")//发送信息
+                    sendMsg("哈哈");
+                }
+                // 监听close
+                ws.onclose = function (e) {
+                    console.log("连接已关闭:");
+                }
+                //监听errors
+                ws.onerror = function (e) {
+                    layer.msg('连接异常,请稍后重新加载!', { icon: 2, time: 5000 });
+                }
+                // 监听 messages
+                ws.onmessage = function (e) {
+                    //if (e.data instanceof ArrayBuffer) {
+                    //    console.log(e.data);
+                    //} else {
+                    //    console.log(e.data);
+                    //}
+                    console.log(e);
+                    sendMsg("哈哈");
+
+                }
+                function sendMsg(stringMsg) {
+                    ws.send(stringMsg);
+                }
+            }
+            catch (exception) { if (window.console) console.log(exception); }
+        });
+      
+    }
+</script>

@@ -5,13 +5,18 @@ using log4net.Config;
 using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreUI.Autofac;
 using NetCoreUI.Filter;
+using NetCoreUI.WebSocketServer;
 using System;
 using System.IO;
+using System.Net.WebSockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NetCoreUI
 {
@@ -85,8 +90,19 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=CeShi}/{action=ReactCeShi}/{id?}");
+                    template: "{controller=CeShi}/{action=Test}/{id?}");
             });
+            #endregion
+            #region 使用WebSocket
+            //绑定WebSocket  
+            app.Map("/CeShi/Connect", (con) =>
+            {
+                con.UseWebSockets();
+                WSHanleTwo _two = new WSHanleTwo();
+                //Func<HttpContext, Func<Task>, Task> middleware
+                con.Use(_two.Connect);//添加自定义中间件
+            });
+
             #endregion
         }
     }
