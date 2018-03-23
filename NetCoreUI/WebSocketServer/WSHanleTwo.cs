@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using NetCoreHelp;
+using NetCoreModel;
+using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace NetCoreUI.WebSocketServer
 {
@@ -39,13 +39,14 @@ namespace NetCoreUI.WebSocketServer
             var seg = new ArraySegment<byte>(buffer);
             while (this.socket.State == WebSocketState.Open)
             {
-                //.Split('?'
                 var incoming = await this.socket.ReceiveAsync(seg, CancellationToken.None);
                 var ReceiveMessige= System.Text.UTF8Encoding.Default.GetString(seg.Array).Split('&');
-
+                //解析Json字符串为JObject
+                var  model=   JsonHelper.DeserializeJsonToObject<WebSocketBaseModel>(ReceiveMessige[0]);
+                Thread.Sleep(model.SleepTime);
                 //seg.Array
                 byte[] backInfo = System.Text.UTF8Encoding.Default.GetBytes("服务端相应内容");
-                Thread.Sleep(1000);
+             
                 //var outgoing = new ArraySegment<byte>(backInfo, 0, incoming.Count);
 
                 var outgoing = new ArraySegment<byte>(backInfo, 0, backInfo.Length);
