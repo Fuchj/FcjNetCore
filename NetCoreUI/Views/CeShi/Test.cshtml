@@ -107,8 +107,8 @@
                 // 监听open
                 ws.onopen = function (e) {
                     console.log("成功连接服务器");
-                    //sendMsg("{ 'Key': 'Monitor_ProductLine', 'Value': 10101,'SleepTime': 500}")//发送信息
-                    sendMsg("哈哈");
+                    sendMsg("{ 'Key': 'Monitor_ProductLine', 'Value': 10101,'SleepTime': 500}&")//发送信息
+                    //sendMsg("哈哈");
                 }
                 // 监听close
                 ws.onclose = function (e) {
