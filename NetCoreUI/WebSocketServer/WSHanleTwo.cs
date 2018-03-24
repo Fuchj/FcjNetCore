@@ -45,12 +45,10 @@ namespace NetCoreUI.WebSocketServer
                 var  model=   JsonHelper.DeserializeJsonToObject<WebSocketBaseModel>(ReceiveMessige[0]);
                 Thread.Sleep(model.SleepTime);
                 //seg.Array
-                byte[] backInfo = System.Text.UTF8Encoding.Default.GetBytes("服务端相应内容");
-             
+                byte[] backInfo = System.Text.UTF8Encoding.Default.GetBytes("服务端相应内容");           
                 //var outgoing = new ArraySegment<byte>(backInfo, 0, incoming.Count);
-
                 var outgoing = new ArraySegment<byte>(backInfo, 0, backInfo.Length);
-               var a=   outgoing.Array;
+                var a=   outgoing.Array;
                 var str=   System.Text.UTF8Encoding.Default.GetString(a);
                 await this.socket.SendAsync(outgoing, WebSocketMessageType.Text, true, CancellationToken.None);
             }

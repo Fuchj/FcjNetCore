@@ -15,8 +15,7 @@ namespace NetCoreUI.Controllers
             _ceshi = ceshi;
         }
         public IActionResult Index()
-        {
-            
+        {            
             ViewData["ss"]= _ceshi.Show();
             return View();
         }
