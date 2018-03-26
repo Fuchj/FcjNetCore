@@ -27,5 +27,9 @@ namespace NetCoreUI.Controllers
         {
             return View();
         }
+        public IActionResult WebSocketCeShi()
+        {
+            return View();
+        }
     }
 }

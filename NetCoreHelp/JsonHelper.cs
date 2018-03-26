@@ -31,13 +31,22 @@ namespace NetCoreHelp
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="json"></param>
         /// <returns>对象实体</returns>
-        public static T DeserializeJsonToObject<T>(string json) where T : class
+        public static bool DeserializeJsonToObject<T>(string json,out T t) where T : class
         {
-            JsonSerializer serializer = new JsonSerializer();
-            StringReader sr = new StringReader(json);
-            object o = serializer.Deserialize(new JsonTextReader(sr), typeof(T));
-            T t = o as T;
-            return t;
+            t = null;
+            try
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                StringReader sr = new StringReader(json);
+                object o = serializer.Deserialize(new JsonTextReader(sr), typeof(T));
+                t = o as T;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }      
+            
         }
 
         /// <summary>

@@ -90,7 +90,7 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=CeShi}/{action=Test}/{id?}");
+                    template: "{controller=CeShi}/{action=WebSocketCeShi}/{id?}");
             });
             #endregion
             #region 使用WebSocket
