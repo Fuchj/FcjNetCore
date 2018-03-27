@@ -35,7 +35,7 @@ namespace NetCoreUI.Filter
             //context.Exception,
             //context.Exception.Message);
             #endregion
-            if (_env.IsDevelopment())
+            if (!_env.IsDevelopment())
             {
                 log.Error(context.Exception.ToString());
                 //var JsonMessage = new ErrorResponse("未知错误,请重试");

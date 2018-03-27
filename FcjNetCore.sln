@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreService", "NetCoreSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreModel", "NetCoreModel\NetCoreModel.csproj", "{53E42531-79C2-4862-9654-80BAFA173D8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreIservice", "NetCoreIservice\NetCoreIservice.csproj", "{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCoreIservice", "NetCoreIservice\NetCoreIservice.csproj", "{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "公共类库", "公共类库", "{5BC23785-F9EF-4404-8F3F-533CF64066AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "接口类库", "接口类库", "{701E2988-9679-41AA-9B55-0FF1D5B8DA5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{FFE7E5A0-18FD-4C9E-8716-C349B7888A31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +48,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80E85C08-68BD-4518-AE7E-F6B365149FC7} = {5BC23785-F9EF-4404-8F3F-533CF64066AF}
+		{EFD9715D-5D6A-4577-AF83-82726BB901A1} = {701E2988-9679-41AA-9B55-0FF1D5B8DA5A}
+		{53E42531-79C2-4862-9654-80BAFA173D8F} = {FFE7E5A0-18FD-4C9E-8716-C349B7888A31}
+		{7DECE025-E4B0-4637-A6DD-AAF5C81D5EC5} = {701E2988-9679-41AA-9B55-0FF1D5B8DA5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44A1F586-B7F5-410C-807F-E11D947F3B9E}

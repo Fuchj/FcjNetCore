@@ -22,7 +22,7 @@ namespace NetCoreUI.Controllers
         {
             //_logger.LogError("logger记录错误");
             //log.Error("log4net记录错误");
-            //throw new Exception();
+            throw new Exception();
             return View();
         }
 
