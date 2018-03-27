@@ -53,9 +53,7 @@ namespace NetCoreUI.WebSocketServer
                     }                  
                 }               
                 var ErrorOutgoing = new ArraySegment<byte>(backInfo, 0, backInfo.Length);
-                await this.socket.SendAsync(ErrorOutgoing, WebSocketMessageType.Text, true, CancellationToken.None);
-                
-               
+                await this.socket.SendAsync(ErrorOutgoing, WebSocketMessageType.Text, true, CancellationToken.None);              
             }
         }
     }
