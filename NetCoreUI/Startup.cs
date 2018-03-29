@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NetCoreUI.Autofac;
 using NetCoreUI.Filter;
+using NetCoreUI.MyMiddleware;
 using NetCoreUI.WebSocketServer;
 using System;
 using System.IO;
@@ -61,18 +62,36 @@ namespace NetCoreUI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseErrorHandling();//自定义异常
+            #region 自定义中间件越过其他组件
+            //app.Run(async context =>
+            //{
+            //    await context.Response.WriteAsync("Custom middleware over the other components!");
+            //});
+            app.Use(async (context, next) =>
+            {
+                throw new Exception();
+                // Do work that doesn't write to the Response.
+                await next.Invoke();
+                // Do logging or other work that doesn't write to the Response.
+            });
+
+            #endregion
             #region 开发环境选择
             if (env.IsDevelopment())
             {
                 //开发环境异常处理
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+              
             }
             else
             {
                 //生产环境异常处理
+                app.UseErrorHandling();
                 app.UseExceptionHandler("/Home/Error");
             }
+
             #endregion
             #region 使用HTTP错误代码页
             app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
@@ -90,7 +109,7 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Index}/{id?}");
             });
             #endregion
             #region 使用WebSocket

@@ -8,9 +8,14 @@
 <head>
     <meta charset="UTF-8" />
     <title>Hello World</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    @*<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>*@
+    <script src="~/lib/react/react.development.js"></script>
+    <script src="~/lib/react/react-art.development.js"></script>
+    <script src="~/lib/react/react-dom.development.js"></script>
+    <script src="~/lib/react/react-dom-server.browser.development.js"></script>
+    <script src="~/lib/react/react-dom-unstable-native-dependencies.development.js"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -29,15 +34,16 @@
         }
 
         setInterval(tick, 1000);*@
-
-        function Welcome(props) {
-        return<h1>Hello, {props.name}</h1>;
-        }
         //组件
-        const element1 = <Welcome name="aaa" />;
-        //const element =<h1>123456</h1> ;
+        function Welcome(props) {
+        return
+        <h1>Hello, {props.name}</h1>;
+        }
+
+        const element =
+        <Welcome name="Sara" />;
         ReactDOM.render(
-        element1,
+        element,
         document.getElementById('root')
         );
 
