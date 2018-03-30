@@ -68,13 +68,13 @@ namespace NetCoreUI
             //{
             //    await context.Response.WriteAsync("Custom middleware over the other components!");
             //});
-            app.Use(async (context, next) =>
-            {
-                throw new Exception();
-                // Do work that doesn't write to the Response.
-                await next.Invoke();
-                // Do logging or other work that doesn't write to the Response.
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    throw new Exception();
+            //    // Do work that doesn't write to the Response.
+            //    await next.Invoke();
+            //    // Do logging or other work that doesn't write to the Response.
+            //});
 
             #endregion
             #region 开发环境选择
