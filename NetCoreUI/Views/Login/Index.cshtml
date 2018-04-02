@@ -38,6 +38,7 @@
         </form>
         <input type="hidden" asp-for="Message" />
     </div>
+
     <script src="~/js/jquery-1.91.min.js"></script>
     <script src="~/layui/layui.js"></script>
     <script src="~/js/login.js" asp-append-version="true"></script>
@@ -48,9 +49,9 @@
         var msg = $("#Message").val();
         if (msg != "") {
             layui.use('layer', function () {
-                var layer = layui.layer                           
+                var layer = layui.layer
                 layer.msg(msg);
             })
-        }      
+        }
     })
 </script>

@@ -1,0 +1,111 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>VueIndex</title>
+</head>
+<body>
+    <div id="app"> {{ messageaa }}</div>
+    <div id="app-2">
+        <span v-bind: title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span>
+    </div>
+    <div id="app-3">
+        <p v-if="seeng">现在你看到我了</p>
+    </div>
+    <div id="app-4">
+        <ol>
+            <li v-for="todo1 in todos">
+                {{ todo1.text }}
+            </li>
+        </ol>
+    </div>
+    <div id="app-5">
+        <p>{{ message }}</p>
+        <button v-on:click="reverseMessage">逆转消息</button>
+    </div>
+    <div id="app-6">
+        <p>{{ message }}</p>
+        <input v-model="message">@*模型绑定*@
+        <input v-model="asd">
+        <button v-on:click="reverseMessage">确定</button>
+    </div>
+</body>
+</html>
+
+
+<script src="~/js/jquery-1.91.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            messageaa: 'Hello Vue!',
+            aa: 123
+        }
+    })
+    var app2 = new Vue({
+        el: '#app-2',
+        data: {
+            message: '页面加载于 ' + new Date().toLocaleString()
+        }
+    })
+    var app3 = new Vue({
+        el: '#app-3',
+        data: {
+            seeng: true
+        }
+    })
+   
+   $(function () {
+        $.get("Vue/GetData", "", function (data) {          
+            new Vue({
+                el: '#app-4',
+                data: {                   
+                    todos: data
+                }
+            });
+        });
+    }); 
+    var app5 = new Vue({
+        el: '#app-5',
+        data: {
+            message: 'Hello Vue.js!'
+        },
+        methods: {
+            reverseMessage: function () {
+               
+                $.get("Vue/GetData", "", function (data) {
+                    alert(data);
+                });
+               
+                 //this.message = this.message.split('').reverse().join('')
+            }
+        }
+    })
+    var app6 = new Vue({
+        el: '#app-6',
+        data: {
+            message: 'Hello Vue!',
+            asd:"aaa"        
+        },
+        methods: {
+            reverseMessage: function () {
+                console.log(this.message + this.asd);
+                alert(this.message + this.asd);
+            }
+        }
+    });
+   function AjaxHelper() {
+        $.get("Vue/GetData", "", function (data) {
+            return data;
+        });
+    };
+</script>
