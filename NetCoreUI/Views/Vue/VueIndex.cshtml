@@ -11,12 +11,7 @@
     <title>VueIndex</title>
 </head>
 <body>
-    <div id="app"> {{ messageaa }}</div>
-    <div id="app-2">
-        <span v-bind: title="message">
-            鼠标悬停几秒钟查看此处动态绑定的提示信息！
-        </span>
-    </div>
+    <div id="app"> {{ messageaa }}</div>  
     <div id="app-3">
         <p v-if="seeng">现在你看到我了</p>
     </div>
@@ -39,10 +34,8 @@
     </div>
 </body>
 </html>
-
-
 <script src="~/js/jquery-1.91.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="~/js/vue.js" asp-append-version="true"></script>
 <script>
     var app = new Vue({
         el: '#app',
@@ -51,12 +44,7 @@
             aa: 123
         }
     })
-    var app2 = new Vue({
-        el: '#app-2',
-        data: {
-            message: '页面加载于 ' + new Date().toLocaleString()
-        }
-    })
+ 
     var app3 = new Vue({
         el: '#app-3',
         data: {
@@ -84,6 +72,8 @@
                
                 $.get("Vue/GetData", "", function (data) {
                     alert(data);
+                   
+                    app5.message = data[0];
                 });
                
                  //this.message = this.message.split('').reverse().join('')

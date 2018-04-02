@@ -109,7 +109,7 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Vue}/{action=ZujianIndex}/{id?}");
+                    template: "{controller=Vue}/{action=VueIndex}/{id?}");
             });
             #endregion
             #region 使用WebSocket
