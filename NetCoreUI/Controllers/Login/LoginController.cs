@@ -10,6 +10,7 @@ namespace NetCoreUI.Controllers.Login
 {
     public class LoginController : Controller
     {
+        #region 常规登录
         public IActionResult Index()
         {
             return View(new UserInfo());
@@ -36,5 +37,33 @@ namespace NetCoreUI.Controllers.Login
             return View(Model);
             //return Json(new { IsSuccess = 0, Message = $"请求失败，{Error}" });
         }
+        #endregion
+        #region 使用Vue
+        public IActionResult VueLoginIndex()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult VueLoginIndex([FromForm]UserInfo Model)
+        {
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.Set("CurrentUser", SessionConvert.Object2Bytes(Model));
+                return Json(new { IsSuccess = 1, Message = "成功" ,AA=2});
+                //跳转到首页
+                //return RedirectToAction("Index", "Home");
+            }
+            string Error = "";
+            foreach (var item in ModelState)
+            {
+                if (item.Value.Errors.Count > 0)
+                {
+                    Error += item.Value.Errors.First().ErrorMessage;
+                }
+            }
+            Model.Message = Error;
+            return View(Model);
+        }
+        #endregion
     }
 }

@@ -75,7 +75,6 @@ namespace NetCoreUI
             //    await next.Invoke();
             //    // Do logging or other work that doesn't write to the Response.
             //});
-
             #endregion
             #region 开发环境选择
             if (env.IsDevelopment())
@@ -91,7 +90,6 @@ namespace NetCoreUI
                 app.UseErrorHandling();
                 app.UseExceptionHandler("/Home/Error");
             }
-
             #endregion
             #region 使用HTTP错误代码页
             app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
@@ -109,7 +107,9 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Vue}/{action=VueIndex}/{id?}");
+                    //template: "{controller=Vue}/{action=ZuJianIndex}/{id?}");
+                    //template: "{controller=Login}/{action=Index}/{id?}");
+                template: "{controller=Login}/{action=VueLoginIndex}/{id?}");
             });
             #endregion
             #region 使用WebSocket
@@ -121,7 +121,6 @@ namespace NetCoreUI
                 //Func<HttpContext, Func<Task>, Task> middleware
                 con.Use(_two.Connect);//添加自定义中间件
             });
-
             #endregion
         }
     }

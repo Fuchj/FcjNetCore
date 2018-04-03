@@ -25,13 +25,23 @@
             </todo-item>
         </ol>
     </div>
+    <div id="str">
+        <ss></ss>
+        @*<child message="hello1!"></child>*@
+        <child my-message="hello2!"></child>
+    </div>
+    <div id="prop-example-2">
+        <input v-model="parentMsg">
+        <br>
+        <child v-bind:my-message="parentMsg"></child>
+    </div>
 </body>
 </html>
 <script src="~/js/jquery-1.91.min.js"></script>
 <script src="~/js/vue.js" asp-append-version="true"></script>
 @*<script src="https://cdn.jsdelivr.net/npm/vue" ></script>*@
 <script>
-
+    //注册一个全局组件
     // 定义名为 todo-item 的新组件
     Vue.component('todo-item', {
         // todo-item 组件现在接受一个
@@ -40,7 +50,6 @@
         props: ['todo'],
         template: '<li>{{ todo.text }}</li>'
     })
-
     var app7 = new Vue({
         el: '#app-7',
         data: {
@@ -49,6 +58,27 @@
                 { id: 1, text: '奶酪' },
                 { id: 2, text: '随便其它什么人吃的东西' }
             ]
+        },
+        created: function () {//app7示例创建后触发
+            // `this` 指向 vm 实例
+            console.log('data is: ' + this.groceryList)
+        }
+    })
+    Vue.component('ss', {
+        template:'<P>你好</P>'
+    })
+    Vue.component('child', {
+        // 在 JavaScript 中使用 camelCase
+        props: ['myMessage'],
+        template: '<span>{{ myMessage }}</span>'
+    })
+    var app8 = new Vue({
+        el: '#str'
+    });
+    new Vue({
+        el: '#prop-example-2',
+        data: {
+            parentMsg: 'Message from parent'
         }
     })
 </script>
