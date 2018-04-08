@@ -21,6 +21,10 @@ namespace NetCoreUI.Controllers
         {
             return View();
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult GetData()
         {

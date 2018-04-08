@@ -17,7 +17,7 @@
 <body class="login-container">
     <div class="login-box" id="app-1">
         <h2></h2>
-        @*<form class="layui-form">*@
+        <form class="layui-form">
             <div class="login-face">
                 @*<img src="~/images/Logo.png" alt="郑大智能" />*@
             </div>
@@ -32,7 +32,7 @@
             <div class="layui-form-item">
                 <button v-on:click="reverseMessage" class="layui-btn">登录</button>
             </div>
-        @*</form>*@
+        </form>        
     </div>
 </body>
 </html>
@@ -40,36 +40,35 @@
 <script src="~/layui/layui.js"></script>
 <script src="~/js/login.js" asp-append-version="true"></script>
 <script src="~/js/vue.js" asp-append-version="true"></script>
-
 <script>
-    var app6 = new Vue({
-        el: '#app-1',
-        data: {
-            UserName: 'fcj',
-            UserPassWord: ""
-        },
-        methods: {
-            reverseMessage: function () {
-                //console.log(this.message + this.asd);
-                //alert(this.UserName + this.UserPassWord);
-                var parame = {};
-                parame.UserName = this.UserName;
-                parame.UserPassWord = this.UserPassWord;
-                $.post("Login/VueLoginIndex", parame, function (data) {
-                    if (data.isSuccess == 1) {
-                        window.location.href = "@Url.Action("Index", "Home")";
-                    } else { 
-                        layui.use('layer', function () {
-                            var layer = layui.layer
-                            layer.msg("未知错误");
-                        })
-
+    $(function () { 
+        layui.use('layer', function () {
+            var layer = layui.layer
+            var app6 = new Vue({
+                el: '#app-1',
+                data: {
+                    UserName: 'fcj',
+                    UserPassWord: ""
+                },
+                methods: {
+                    reverseMessage: function () {
+                        var parame = {};
+                        parame.UserName = this.UserName;
+                        parame.UserPassWord = this.UserPassWord;
+                        $.post("Login/VueLoginIndex", parame, function (data) {
+                            if (data.isSuccess == 1) {
+                                window.location.href = "@Url.Action("Index", "Home")";
+                            } else {
+                                //console.log(data.message);
+                                //layer.msg(data.message,10);
+                                layer.alert(data.message);   
+                            }                         
+                        });                      
                     }
-                    
-                    
-                });
-            }
-        }
-    });
-    
+
+                }
+            });
+        })
+
+    })
 </script>

@@ -35,6 +35,21 @@
         <br>
         <child v-bind:my-message="parentMsg"></child>
     </div>
+    <hr />
+    <div>局部注册</div>
+    <div id="qwe">
+        <myqw-component v-bind:my-Message="9999">456</myqw-component>
+    </div>
+    <hr />
+    <div id="ert">
+        <child my-message="清明"></child>
+    </div>
+    <hr />
+    <div>组件校验</div>
+    <div id="aaa">
+        <input v-model="parentMsg">
+        <my-component v-bind:num="8888" v-bind:msg="parentMsg">456</my-component>
+    </div>
 </body>
 </html>
 <script src="~/js/jquery-1.91.min.js"></script>
@@ -70,15 +85,80 @@
     Vue.component('child', {
         // 在 JavaScript 中使用 camelCase
         props: ['myMessage'],
-        template: '<span>{{ myMessage }}</span>'
+        template: `<div>
+                        <div><span>{{ myMessage }}</span></div>
+                        <div><span>123{{ myMessage }}</span></div>
+                    </div>
+                   `
     })
     var app8 = new Vue({
         el: '#str'
     });
+    //new Vue({
+    //    el: '#prop-example-2',
+    //    data: {
+    //        parentMsg: 'Message from parent'
+    //    }
+    //})
+    var app9 = new Vue({
+        el: '#ert'
+    });
+</script>
+<script>
+    //------------------------组件局部注册----------------------------
+    var zujian = {
+        props: ['myMessage'],
+        template: '<div>{{ myMessage+1 }}</div>'
+    };
+    //局部注册只能在#qwe中使用
     new Vue({
-        el: '#prop-example-2',
-        data: {
-            parentMsg: 'Message from parent'
+        el: '#qwe',
+        // ...
+        components: {            
+            // <my-component> 将只在父组件模板中可用
+            'myqw-component': zujian//myqw：组件标签名，可以按规则任意命名
         }
-    })
+    });
+   
+</script>
+<script>
+    // //------------------------组件校验---------------------------
+    var verify = {
+        props: {
+            'num': {
+                type: Number,//必须是数字
+                default: 1000,//默认值
+            },
+            'msg': {
+                type: Number,//必须是字符串
+                required: true//不能为null
+            },
+            'message': {
+                type: Object,
+                default: function () {
+                    return { message: 'hello' }
+                }
+            }
+        },
+        template: `<div>
+                    <P>{{ num+1 }}</p>
+                    <P>{{ msg+1 }}</p>
+                    <P>{{ message }}</p>
+                  </div>`
+
+                };
+    new Vue({
+        el: '#aaa',
+        // ...
+        components: {
+            // <my-component> 将只在父组件模板中可用
+            'my-component': verify//组件标签名，可以按规则任意命名
+        },
+        data: {
+            parentMsg: 2222
+        }
+
+
+    });
+
 </script>

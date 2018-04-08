@@ -49,7 +49,7 @@ namespace NetCoreUI.Controllers.Login
             if (ModelState.IsValid)
             {
                 HttpContext.Session.Set("CurrentUser", SessionConvert.Object2Bytes(Model));
-                return Json(new { IsSuccess = 1, Message = "成功" ,AA=2});
+                return Json(new {IsSuccess = 1, Message = "成功"});
                 //跳转到首页
                 //return RedirectToAction("Index", "Home");
             }
@@ -62,7 +62,7 @@ namespace NetCoreUI.Controllers.Login
                 }
             }
             Model.Message = Error;
-            return View(Model);
+            return Json(new {IsSuccess = 0, Message = Error });           
         }
         #endregion
     }
