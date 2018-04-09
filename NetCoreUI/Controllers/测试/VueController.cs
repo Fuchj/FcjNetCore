@@ -26,6 +26,13 @@ namespace NetCoreUI.Controllers
             return View();
         }
         [HttpGet]
+        public IActionResult GetVueData()
+        {
+            string[] data1 =  { "衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子" };
+            int[] data2 = { 5, 20, 36, 10, 10, 20 };
+            return Json(new { data1, data2 });
+        }
+        [HttpGet]
         public IActionResult GetData()
         {
             var list = new List<VueModel>()
