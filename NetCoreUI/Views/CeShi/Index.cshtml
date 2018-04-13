@@ -12,5 +12,26 @@
 </head>
 <body>
     @ViewData["ss"];
+    <input type="button" id="btn" value="确定"/>
 </body>
 </html>
+<script src="~/js/jquery-1.91.min.js"></script>
+<script>
+    $("#btn").click(function () { 
+        //window.location.href = "https://www.baidu.com";
+        var params = {};
+        params.id = 18;//int PageNumber,int PageSize
+        params.PageNumber = 1;
+        params.PageSize = 3;
+        $.get("CeShi/GetShow", params, function (data) {
+
+            console.log(data);
+
+        });
+    })
+    $.get("CeShi/Show", "", function (data) {
+
+        console.log(data);
+
+    });
+</script>

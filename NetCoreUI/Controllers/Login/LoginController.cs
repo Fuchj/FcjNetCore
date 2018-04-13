@@ -65,5 +65,12 @@ namespace NetCoreUI.Controllers.Login
             return Json(new {IsSuccess = 0, Message = Error });           
         }
         #endregion
+        #region 其他
+        [HttpHead]
+        public IActionResult PreLoad()
+        {
+            return Ok("OK");
+        }
+        #endregion
     }
 }

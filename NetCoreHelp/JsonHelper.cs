@@ -50,7 +50,7 @@ namespace NetCoreHelp
         }
 
         /// <summary>
-        /// 解析JSON数组生成对象实体集合
+        /// 解析JSON数组生成对象实体List集合
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="json"></param>

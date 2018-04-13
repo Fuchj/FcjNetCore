@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SlotIndex</title>
+</head>
+<body>
+    <div id="app">
+        <h1>我是父组件的标题</h1>
+        <my-component>@*父组件模板如果没有内容，将显示my-component slot内的内容*@
+            @*<p>这是一些初始内容</p>
+                <p>这是更多的初始内容</p>*@
+        </my-component>
+    </div>
+</body>
+</html>
+<script src="~/js/jquery-1.91.min.js"></script>
+<script src="~/js/vue.js" asp-append-version="true"></script>
+<script>
+    var zujian = {
+        template:
+            //slot只有在父组件没有相应内容时显示
+            `
+            <div>
+                <h2> 我是子组件的标题</h2>
+                <slot>
+                    <h1>只有在没有要分发的内容时才会显示。</h1>
+                </slot>
+            </div >
+            `
+    };
+    new Vue({
+        el: '#app',
+        // ...
+        components: {
+            // <my-component> 将只在父组件模板中可用
+            'my-component': zujian//myqw：组件标签名，可以按规则任意命名
+        }
+    });
+</script>

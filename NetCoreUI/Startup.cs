@@ -107,9 +107,9 @@ namespace NetCoreUI
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Vue}/{action=Index}/{id?}");
+                    //template: "{controller=Vue}/{action=SlotIndex}/{id?}");
             //template: "{controller=Vue}/{action=ZuJianIndex}/{id?}");
-                    //template: "{controller=Login}/{action=Index}/{id?}");
+                    template: "{controller=CeShi}/{action=Index}/{id?}");
                 //template: "{controller=Login}/{action=ZuJianIndex}/{id?}");
             });
             #endregion

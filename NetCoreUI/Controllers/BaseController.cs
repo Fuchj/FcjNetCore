@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 namespace NetCoreUI.Controllers
 {
     public class BaseController : Controller
-    {
+    {    
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             byte[] result;
