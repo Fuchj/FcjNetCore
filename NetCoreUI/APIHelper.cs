@@ -38,8 +38,8 @@ namespace NetCoreUI
             //_httpClient.Timeout = TimeSpan.FromMinutes(2);
             //HttpContent httpContent = new StringContent("");
             //httpContent.Headers.ContentType.CharSet = "utf-8";
-            var response = await _httpClient.GetAsync(url + RequestParames).ContinueWith(x => x.Result.Content.ReadAsStringAsync().Result);
-            return response;
+            var response = await _httpClient.GetAsync(url + RequestParames).ContinueWith(x => x.Result.Content.ReadAsStringAsync());
+            return response.IsCompletedSuccessfully == true ? response.Result : null;
         }
         /// <summary>
         /// 发起Get请求，返回对象实体
@@ -109,7 +109,7 @@ namespace NetCoreUI
         #endregion
         #region Post请求
         /// <summary>
-        /// post请求，返回自定义类型
+        /// post请求，返回自定义类型集合
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="url"></param>
@@ -122,15 +122,9 @@ namespace NetCoreUI
             {
                 CharSet = "utf-8"
             };
-            //httpContent.Headers.ContentType.CharSet = "utf-8";
-            //new FormUrlEncodedContent(parameters)
-            var response= await _httpClient.PostAsync(url,httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());
-            if (response.IsCompletedSuccessfully)
-            {
-                var result = JsonHelper.DeserializeJsonToList<T>(response.Result);
-                return result;
-            }
-            return null;
+            var response= await _httpClient.PostAsync(url,httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());         
+            return response.IsCompletedSuccessfully == true ? JsonHelper.DeserializeJsonToList<T>(response.Result) : null;
+           
         }
         /// <summary>
         /// post请求，返回json字符串
@@ -148,47 +142,10 @@ namespace NetCoreUI
             {
                 CharSet = "utf-8"
             };
-            //HttpClient httpClient = new HttpClient();
-            //httpClient..setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
-            var response =await _httpClient.PostAsync(url, httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());
-            if (response.IsCompletedSuccessfully)
-            {
-                return response.Result;
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// 发起post请求
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="url">url</param>
-        /// <param name="postData">post数据</param>
-        /// <returns></returns>
-        public static T PostResponse<T>(string url, string postData)
-            where T : class, new()
-        {
-            if (url.StartsWith("https"))
-                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
-
-            HttpContent httpContent = new StringContent(postData);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpClient httpClient = new HttpClient();
-
-            T result = default(T);
-
-            HttpResponseMessage response = httpClient.PostAsync(url, httpContent).Result;
-
-            if (response.IsSuccessStatusCode)
-            {
-                Task<string> t = response.Content.ReadAsStringAsync();
-                string s = t.Result;
-
-                result = JsonConvert.DeserializeObject<T>(s);
-            }
-            return result;
-        }
-        #endregion
+            var response =await _httpClient.PostAsync(url, httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());           
+            return response.IsCompletedSuccessfully == true ? response.Result : null;            
+        }     
+       #endregion
 
 
     }
