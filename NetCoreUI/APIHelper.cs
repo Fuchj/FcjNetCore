@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,7 +13,7 @@ namespace NetCoreUI
 {
     public class APIHelper
     {
-        private static readonly HttpClient _httpClient;
+        private  static readonly  HttpClient _httpClient;
         static APIHelper()
         {
             _httpClient = new HttpClient();
@@ -77,7 +77,7 @@ namespace NetCoreUI
             return null;
 
         }
-        [Obsolete("This class is obsolete;")]
+        [Obsolete("This  class is obsolete;")]
         public async Task<T> HttpGet1<T>(HttpClient client, string url) where T : class
         {
             //Uri newurl = new Uri(url);
@@ -108,9 +108,20 @@ namespace NetCoreUI
         }
         #endregion
         #region Post请求
-        public async Task<IEnumerable<T>> ModelListHttpPost<T>(string url, string RequestParames = "") where T : class
+        /// <summary>
+        /// post请求，返回自定义类型
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url"></param>
+        /// <param name="RequestParames">请求参数</param>
+        /// <returns></returns>
+       public async Task<IEnumerable<T>> ModelListHttpPost<T>(string url, string RequestParames = "") where T : class
         {
-            HttpContent httpContent = new StringContent(RequestParames, Encoding.UTF8);
+            HttpContent httpContent = new StringContent(RequestParames);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json")
+            {
+                CharSet = "utf-8"
+            };
             //httpContent.Headers.ContentType.CharSet = "utf-8";
             //new FormUrlEncodedContent(parameters)
             var response= await _httpClient.PostAsync(url,httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());
@@ -120,6 +131,62 @@ namespace NetCoreUI
                 return result;
             }
             return null;
+        }
+        /// <summary>
+        /// post请求，返回json字符串
+        /// </summary>
+        /// <param name="url"></param>
+        /// <param name="postData">传递参数</param>
+        /// <returns></returns>
+        public async Task<string> JsonPost<T>(string url, T t) where T : class
+        {
+            //if (url.StartsWith("https"))
+            //    System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+            string postData=  JsonHelper.SerializeObject(t);
+            HttpContent httpContent = new StringContent(postData);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json")
+            {
+                CharSet = "utf-8"
+            };
+            //HttpClient httpClient = new HttpClient();
+            //httpClient..setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "utf-8");
+            var response =await _httpClient.PostAsync(url, httpContent).ContinueWith(x => x.Result.Content.ReadAsStringAsync());
+            if (response.IsCompletedSuccessfully)
+            {
+                return response.Result;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 发起post请求
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url">url</param>
+        /// <param name="postData">post数据</param>
+        /// <returns></returns>
+        public static T PostResponse<T>(string url, string postData)
+            where T : class, new()
+        {
+            if (url.StartsWith("https"))
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
+
+            HttpContent httpContent = new StringContent(postData);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpClient httpClient = new HttpClient();
+
+            T result = default(T);
+
+            HttpResponseMessage response = httpClient.PostAsync(url, httpContent).Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                Task<string> t = response.Content.ReadAsStringAsync();
+                string s = t.Result;
+
+                result = JsonConvert.DeserializeObject<T>(s);
+            }
+            return result;
         }
         #endregion
 

@@ -21,7 +21,7 @@ namespace NetCoreHelp
         public static string SerializeObject(object o, string Format = "yyyy-MM-dd hh:mm:ss")
         {
             IsoDateTimeConverter dtConverter = new IsoDateTimeConverter { DateTimeFormat = Format };
-            string json = JsonConvert.SerializeObject(o, dtConverter);
+            string json = JsonConvert.SerializeObject(o, dtConverter); 
             return json;
         }
 

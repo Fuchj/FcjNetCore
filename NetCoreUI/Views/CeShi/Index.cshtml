@@ -24,8 +24,9 @@
         params.PageNumber = 1;
         params.PageSize = 3;
         $.get("CeShi/GetShow", params, function (data) {
-
-            console.log(data);
+            var str = JSON.parse(data.result1);
+            console.log(str);
+            //console.log(data);
 
         });
     })

@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using NetCoreHelp;
 using NetCoreIservice;
 using NetCoreModel;
+using Newtonsoft.Json;
 
 namespace NetCoreUI.Controllers
 {
     public class CeShiController :Controller
     {
         readonly string RequestUrl = "http://localhost:10111";
-       
+        //readonly string RequestUrl = "http://localhost:32451"; 
 
         ICeShi _ceshi;
         APIHelper _apihelper = new APIHelper();
@@ -55,14 +56,10 @@ namespace NetCoreUI.Controllers
         }
         public async Task<IActionResult> GetShow(int id,int PageNumber,int PageSize)
         {
-           // var requestparameter = Request.QueryString.ToString();
-            var requestparameter = $"?id={id}";  
-            var result = await _apihelper.ModelHttpGet<CeShiUser>($"{RequestUrl}/api/Values/UpdateList",requestparameter);
-
-            var str = $"PageNumber={PageNumber}&PageSize={PageSize}";
-            var result1 = await _apihelper.ModelListHttpPost<CeShiUser>($"{RequestUrl}api/Values/Paging", str);
-            //var res = JsonHelper.DeserializeJsonToList<CeShiUser>(result);
-            return Json(new { result });
+            string postData = JsonHelper.SerializeObject(new { PageNumber, PageSize });
+           // var result = await _apihelper.ModelListHttpPost<CeShiUser>($"{RequestUrl}/api/Values/Paging", postData);
+            var result1 = await _apihelper.JsonPost($"{RequestUrl}/api/Values/Paging", new { PageNumber,PageSize });        
+            return Json(new { result1});
         }
         #endregion
     }
