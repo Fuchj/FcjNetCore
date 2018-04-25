@@ -16,15 +16,7 @@ namespace NetCoreUI
         private  static readonly  HttpClient _httpClient;
         static APIHelper()
         {
-            _httpClient = new HttpClient();
-
-            ////帮HttpClient热身
-            //_httpClient.SendAsync(new HttpRequestMessage
-            //{
-            //    Method = new HttpMethod("HEAD"),
-            //    RequestUri = new Uri("/Login/PreLoad" + "/")
-            //})
-            //    .Result.EnsureSuccessStatusCode();
+            _httpClient = new HttpClient();          
         }
         #region Get请求
         /// <summary>
